@@ -19,7 +19,8 @@ Synth01AudioProcessor::Synth01AudioProcessor()
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       )
+                       ),
+    apvts(*this, nullptr, "Parameters", createParameters())
 #endif
 {
     synth.addVoice(new SynthVoice());
@@ -187,6 +188,28 @@ void Synth01AudioProcessor::setStateInformation (const void* data, int sizeInByt
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
+}
+
+juce::AudioProcessorValueTreeState& Synth01AudioProcessor::getApvts()
+{
+    return apvts;
+}
+
+juce::AudioProcessorValueTreeState::ParameterLayout Synth01AudioProcessor::createParameters()
+{
+    //Init vector of params
+    std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
+
+    //Osc Combo box
+    params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC", "Osc", juce::StringArray{"Sine", "Saw", "Square"}, 0));
+
+    //ADSR
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("ATTACK", "Attack", juce::NormalisableRange<float> {0.1f, 1.f}, 0.1f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("DECAY", "Decay", juce::NormalisableRange<float> {0.1f, 1.f}, 0.1f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("SUSTAIN", "Sustain", juce::NormalisableRange<float> {0.1f, 1.f}, 1.f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("RELEASE", "Release", juce::NormalisableRange<float> {0.1f, 3.f}, 0.5f));
+
+    return { params.begin(), params.end() };
 }
 
 //==============================================================================
