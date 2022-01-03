@@ -6,6 +6,15 @@
               companyName="Anthony Beckett">
   <MAINGROUP id="WRtPCj" name="Synth01">
     <GROUP id="{B7E850C8-3A8E-7E9E-5F98-EEB031A65B20}" name="Source">
+      <GROUP id="{D079F7A7-65B7-F740-FC75-7F25EBAA2FF3}" name="Data">
+        <FILE id="certqk" name="AdsrData.cpp" compile="1" resource="0" file="Source/Data/AdsrData.cpp"/>
+        <FILE id="RpCYYw" name="AdsrData.h" compile="0" resource="0" file="Source/Data/AdsrData.h"/>
+      </GROUP>
+      <GROUP id="{A24AE23F-09ED-979B-B2A5-105BFA48D01F}" name="UI">
+        <FILE id="QXB18k" name="AdsrComponent.cpp" compile="1" resource="0"
+              file="Source/UI/AdsrComponent.cpp"/>
+        <FILE id="rZNrYr" name="AdsrComponent.h" compile="0" resource="0" file="Source/UI/AdsrComponent.h"/>
+      </GROUP>
       <FILE id="zBkqqs" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="seMKgg" name="PluginProcessor.h" compile="0" resource="0"

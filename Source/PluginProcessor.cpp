@@ -156,9 +156,15 @@ void Synth01AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
 
     for (int i = 0; i < synth.getNumVoices(); ++i)
     {
-        if (auto voice = dynamic_cast<juce::SynthesiserVoice*>(synth.getVoice(i)))
+        if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i)))
         {
-            //
+            //ADSR
+            voice->update(
+                *apvts.getRawParameterValue("ATTACK"), 
+                *apvts.getRawParameterValue("DECAY"), 
+                *apvts.getRawParameterValue("SUSTAIN"), 
+                *apvts.getRawParameterValue("RELEASE")
+            );
         }
     }
 
