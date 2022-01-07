@@ -11,10 +11,9 @@
 
 //==============================================================================
 Synth01AudioProcessorEditor::Synth01AudioProcessorEditor (Synth01AudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p), adsr(audioProcessor.getApvts())
+    : AudioProcessorEditor (&p), audioProcessor (p), osc(audioProcessor.getApvts(), "OSC1WAVETYPE"), adsr(audioProcessor.getApvts())
 {
-    oscSelectorAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor.getApvts(), "OSC", oscSelector);
-
+    addAndMakeVisible(osc);
     addAndMakeVisible(adsr);
 
     // Make sure that before the constructor has finished, you've set the
@@ -35,5 +34,6 @@ void Synth01AudioProcessorEditor::paint (juce::Graphics& g)
 
 void Synth01AudioProcessorEditor::resized()
 {
+    osc.setBounds(10, 10, 100, 30);
     adsr.setBounds(getWidth() / 2, 0, getWidth() / 2, getHeight());
 }

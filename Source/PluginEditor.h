@@ -11,6 +11,7 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 #include "UI/AdsrComponent.h"
+#include "UI/OscComponent.h"
 
 //==============================================================================
 /**
@@ -26,16 +27,13 @@ public:
     void resized() override;
 
 private:
-    //Init sliders
-    juce::ComboBox oscSelector;
-
-    //Init attachments
-    std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> oscSelectorAttachment;
+    
 
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     Synth01AudioProcessor& audioProcessor;
 
+    OscComponent osc;
     AdsrComponent adsr;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (Synth01AudioProcessorEditor)

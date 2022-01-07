@@ -165,6 +165,8 @@ void Synth01AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
                 *apvts.getRawParameterValue("SUSTAIN"), 
                 *apvts.getRawParameterValue("RELEASE")
             );
+
+            voice->getOscillator().setWaveType(*apvts.getRawParameterValue("OSC1WAVETYPE"));
         }
     }
 
@@ -214,6 +216,8 @@ juce::AudioProcessorValueTreeState::ParameterLayout Synth01AudioProcessor::creat
     params.push_back(std::make_unique<juce::AudioParameterFloat>("DECAY", "Decay", juce::NormalisableRange<float> {0.1f, 1.f}, 0.1f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("SUSTAIN", "Sustain", juce::NormalisableRange<float> {0.1f, 1.f}, 1.f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("RELEASE", "Release", juce::NormalisableRange<float> {0.1f, 3.f}, 0.5f));
+
+    params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC1WAVETYPE", "Osc 1 Wave Type", juce::StringArray{"Sine", "Saw", "Square"}, 0));
 
     return { params.begin(), params.end() };
 }
